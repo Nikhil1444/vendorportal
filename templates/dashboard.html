@@ -37,48 +37,38 @@
         .header{
             display:flex;
             align-items:center;
-            justify-content:space-between;
-            margin-bottom:30px;
-        }
-
-        .left-header{
-            display:flex;
-            align-items:center;
+            margin-bottom:25px;
         }
 
         .logo{
             width:220px;
-            height:auto;
-            margin-right:25px;
+            margin-right:20px;
         }
 
         h1{
             color:white;
             font-size:35px;
-            text-shadow:2px 2px 5px black;
         }
 
-        .top-options{
+        .filters{
             display:flex;
             gap:15px;
             margin-bottom:25px;
             flex-wrap:wrap;
         }
 
-        .top-options input{
+        .filters input{
             padding:12px;
             border:none;
             border-radius:8px;
-            width:180px;
+            width:200px;
             font-size:15px;
         }
 
         table{
             width:100%;
             border-collapse:collapse;
-
-            background:rgba(255,255,255,0.90);
-
+            background:white;
             border-radius:10px;
             overflow:hidden;
         }
@@ -87,42 +77,33 @@
             background:blue;
             color:white;
             padding:15px;
-            font-size:18px;
         }
 
         td{
             padding:12px;
             border:1px solid lightgray;
             text-align:center;
-            font-size:16px;
-        }
-
-        tr:hover{
-            background:#f2f2f2;
         }
 
         .completed{
             background:green;
             color:white;
-            padding:8px;
+            padding:6px;
             border-radius:5px;
-            font-weight:bold;
-        }
-
-        .pending{
-            background:red;
-            color:white;
-            padding:8px;
-            border-radius:5px;
-            font-weight:bold;
         }
 
         .partial{
             background:yellow;
             color:black;
-            padding:8px;
+            padding:6px;
             border-radius:5px;
-            font-weight:bold;
+        }
+
+        .pending{
+            background:red;
+            color:white;
+            padding:6px;
+            border-radius:5px;
         }
 
     </style>
@@ -131,89 +112,122 @@
 
 <body>
 
-    <div class="dashboard-box">
+<div class="dashboard-box">
 
-        <div class="header">
+    <div class="header">
 
-            <div class="left-header">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
-                <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
-
-                <h1>Vendor Management Dashboard</h1>
-
-            </div>
-
-        </div>
-
-        <div class="top-options">
-
-            <input type="date">
-
-            <input type="text" placeholder="PO Number">
-
-            <input type="text" placeholder="Material Code">
-
-            <input type="text" placeholder="Vendor Code">
-
-        </div>
-
-        <table>
-
-            <tr>
-                <th>Date</th>
-                <th>PO No</th>
-                <th>Material Code</th>
-                <th>Vendor Code</th>
-                <th>Material</th>
-                <th>Size</th>
-                <th>PO Qty</th>
-                <th>Dispatch Qty</th>
-                <th>Pending Qty</th>
-                <th>Status</th>
-            </tr>
-
-            <tr>
-                <td>12-May-2026</td>
-                <td>450001</td>
-                <td>MAT101</td>
-                <td>VEN001</td>
-                <td>Belt</td>
-                <td>A23</td>
-                <td>1000</td>
-                <td>600</td>
-                <td>400</td>
-                <td><span class="partial">PARTIAL COMPLETED</span></td>
-            </tr>
-
-            <tr>
-                <td>12-May-2026</td>
-                <td>450002</td>
-                <td>MAT102</td>
-                <td>VEN002</td>
-                <td>Pulley</td>
-                <td>B11</td>
-                <td>500</td>
-                <td>500</td>
-                <td>0</td>
-                <td><span class="completed">COMPLETED</span></td>
-            </tr>
-
-            <tr>
-                <td>12-May-2026</td>
-                <td>450003</td>
-                <td>MAT103</td>
-                <td>VEN003</td>
-                <td>Coupling</td>
-                <td>C15</td>
-                <td>700</td>
-                <td>0</td>
-                <td>700</td>
-                <td><span class="pending">NOT COMPLETED</span></td>
-            </tr>
-
-        </table>
+        <h1>Vendor Management Dashboard</h1>
 
     </div>
+
+    <div class="filters">
+
+        <input type="text" id="dateFilter" placeholder="Search Date">
+
+        <input type="text" id="poFilter" placeholder="Search PO Number">
+
+        <input type="text" id="materialFilter" placeholder="Search Material Code">
+
+        <input type="text" id="vendorFilter" placeholder="Search Vendor Code">
+
+    </div>
+
+    <table id="dataTable">
+
+        <tr>
+            <th>Date</th>
+            <th>PO No</th>
+            <th>Material Code</th>
+            <th>Vendor Code</th>
+            <th>Material</th>
+            <th>PO Qty</th>
+            <th>Dispatch Qty</th>
+            <th>Pending Qty</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>12-May-2026</td>
+            <td>450001</td>
+            <td>MAT101</td>
+            <td>VEN001</td>
+            <td>Belt</td>
+            <td>1000</td>
+            <td>600</td>
+            <td>400</td>
+            <td><span class="partial">PARTIAL</span></td>
+        </tr>
+
+        <tr>
+            <td>13-May-2026</td>
+            <td>450002</td>
+            <td>MAT102</td>
+            <td>VEN002</td>
+            <td>Pulley</td>
+            <td>500</td>
+            <td>500</td>
+            <td>0</td>
+            <td><span class="completed">COMPLETED</span></td>
+        </tr>
+
+        <tr>
+            <td>14-May-2026</td>
+            <td>450003</td>
+            <td>MAT103</td>
+            <td>VEN003</td>
+            <td>Coupling</td>
+            <td>700</td>
+            <td>0</td>
+            <td>700</td>
+            <td><span class="pending">PENDING</span></td>
+        </tr>
+
+    </table>
+
+</div>
+
+<script>
+
+const filters = document.querySelectorAll('.filters input');
+
+filters.forEach(input => {
+    input.addEventListener('keyup', filterTable);
+});
+
+function filterTable() {
+
+    let date = document.getElementById('dateFilter').value.toLowerCase();
+    let po = document.getElementById('poFilter').value.toLowerCase();
+    let material = document.getElementById('materialFilter').value.toLowerCase();
+    let vendor = document.getElementById('vendorFilter').value.toLowerCase();
+
+    let table = document.getElementById('dataTable');
+    let tr = table.getElementsByTagName('tr');
+
+    for(let i = 1; i < tr.length; i++) {
+
+        let tdDate = tr[i].getElementsByTagName('td')[0];
+        let tdPO = tr[i].getElementsByTagName('td')[1];
+        let tdMaterial = tr[i].getElementsByTagName('td')[2];
+        let tdVendor = tr[i].getElementsByTagName('td')[3];
+
+        if(
+            tdDate.innerHTML.toLowerCase().includes(date) &&
+            tdPO.innerHTML.toLowerCase().includes(po) &&
+            tdMaterial.innerHTML.toLowerCase().includes(material) &&
+            tdVendor.innerHTML.toLowerCase().includes(vendor)
+        ){
+            tr[i].style.display = "";
+        }
+        else{
+            tr[i].style.display = "none";
+        }
+    }
+}
+
+</script>
 
 </body>
 

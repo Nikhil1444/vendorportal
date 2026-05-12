@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Vendor Portal Login</title>
+    <title>JK Vendor Portal Login</title>
 
     <style>
 
@@ -87,6 +87,21 @@
             background:darkblue;
         }
 
+        .forgot-password{
+            margin-top:18px;
+        }
+
+        .forgot-password a{
+            color:white;
+            text-decoration:none;
+            font-size:16px;
+            font-weight:bold;
+        }
+
+        .forgot-password a:hover{
+            text-decoration:underline;
+        }
+
     </style>
 
 </head>
@@ -97,7 +112,7 @@
 
         <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
-        <h1>Vendor Portal Login</h1>
+        <h1>JK Vendor Portal Login</h1>
 
         <form method="POST">
 
@@ -108,6 +123,12 @@
             <button type="submit">Login</button>
 
         </form>
+
+        <div class="forgot-password">
+
+            <a href="#">Forgot Password?</a>
+
+        </div>
 
     </div>
 
