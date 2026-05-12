@@ -37,19 +37,40 @@
         .header{
             display:flex;
             align-items:center;
+            justify-content:space-between;
             margin-bottom:30px;
         }
 
+        .left-header{
+            display:flex;
+            align-items:center;
+        }
+
         .logo{
-            width:250px;
+            width:220px;
             height:auto;
-            margin-right:30px;
+            margin-right:25px;
         }
 
         h1{
             color:white;
-            font-size:38px;
+            font-size:35px;
             text-shadow:2px 2px 5px black;
+        }
+
+        .top-options{
+            display:flex;
+            gap:15px;
+            margin-bottom:25px;
+            flex-wrap:wrap;
+        }
+
+        .top-options input{
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            width:180px;
+            font-size:15px;
         }
 
         table{
@@ -114,55 +135,79 @@
 
         <div class="header">
 
-            <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+            <div class="left-header">
 
-            <h1>Vendor Management Dashboard</h1>
+                <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+
+                <h1>Vendor Management Dashboard</h1>
+
+            </div>
+
+        </div>
+
+        <div class="top-options">
+
+            <input type="date">
+
+            <input type="text" placeholder="PO Number">
+
+            <input type="text" placeholder="Material Code">
+
+            <input type="text" placeholder="Vendor Code">
 
         </div>
 
         <table>
 
             <tr>
+                <th>Date</th>
                 <th>PO No</th>
+                <th>Material Code</th>
+                <th>Vendor Code</th>
                 <th>Material</th>
                 <th>Size</th>
                 <th>PO Qty</th>
                 <th>Dispatch Qty</th>
                 <th>Pending Qty</th>
-                <th>Commitment Date</th>
                 <th>Status</th>
             </tr>
 
             <tr>
+                <td>12-May-2026</td>
                 <td>450001</td>
+                <td>MAT101</td>
+                <td>VEN001</td>
                 <td>Belt</td>
                 <td>A23</td>
                 <td>1000</td>
                 <td>600</td>
                 <td>400</td>
-                <td>20-May-2026</td>
                 <td><span class="partial">PARTIAL COMPLETED</span></td>
             </tr>
 
             <tr>
+                <td>12-May-2026</td>
                 <td>450002</td>
+                <td>MAT102</td>
+                <td>VEN002</td>
                 <td>Pulley</td>
                 <td>B11</td>
                 <td>500</td>
                 <td>500</td>
                 <td>0</td>
-                <td>15-May-2026</td>
                 <td><span class="completed">COMPLETED</span></td>
             </tr>
 
             <tr>
+                <td>12-May-2026</td>
                 <td>450003</td>
+                <td>MAT103</td>
+                <td>VEN003</td>
                 <td>Coupling</td>
                 <td>C15</td>
                 <td>700</td>
                 <td>0</td>
                 <td>700</td>
-                <td>25-May-2026</td>
                 <td><span class="pending">NOT COMPLETED</span></td>
             </tr>
 
