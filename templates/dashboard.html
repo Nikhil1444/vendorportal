@@ -3,232 +3,133 @@
 
 <head>
 
-    <title>Vendor Management Dashboard</title>
+<title>Dashboard</title>
 
-    <style>
+<style>
 
-        body{
-            margin:0;
-            padding:20px;
-            font-family:Arial;
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f3f4f6;
+}
 
-            background-image:url("{{ url_for('static', filename='background.jpg') }}");
-            background-size:cover;
-            background-position:center;
-            background-repeat:no-repeat;
-            min-height:100vh;
-        }
+/* TOP HEADER */
 
-        .dashboard-box{
+.topbar{
+    background:#111827;
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-            background:rgba(255,255,255,0.15);
+/* MENU */
 
-            backdrop-filter:blur(10px);
+.menu{
+    position:relative;
+}
 
-            padding:30px;
+.menu-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
 
-            border-radius:20px;
+.dropdown{
+    display:none;
+    position:absolute;
+    right:0;
+    top:45px;
+    background:white;
+    min-width:200px;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
 
-            box-shadow:0px 0px 25px black;
+.dropdown a{
+    display:block;
+    padding:14px;
+    text-decoration:none;
+    color:black;
+}
 
-            border:1px solid rgba(255,255,255,0.3);
-        }
+.dropdown a:hover{
+    background:#f3f4f6;
+}
 
-        .header{
-            display:flex;
-            align-items:center;
-            margin-bottom:25px;
-        }
+.menu:hover .dropdown{
+    display:block;
+}
 
-        .logo{
-            width:220px;
-            margin-right:20px;
-        }
+/* CONTENT */
 
-        h1{
-            color:white;
-            font-size:35px;
-        }
+.content{
+    padding:30px;
+}
 
-        .filters{
-            display:flex;
-            gap:15px;
-            margin-bottom:25px;
-            flex-wrap:wrap;
-        }
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
 
-        .filters input{
-            padding:12px;
-            border:none;
-            border-radius:8px;
-            width:200px;
-            font-size:15px;
-        }
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-            background:white;
-            border-radius:10px;
-            overflow:hidden;
-        }
-
-        th{
-            background:blue;
-            color:white;
-            padding:15px;
-        }
-
-        td{
-            padding:12px;
-            border:1px solid lightgray;
-            text-align:center;
-        }
-
-        .completed{
-            background:green;
-            color:white;
-            padding:6px;
-            border-radius:5px;
-        }
-
-        .partial{
-            background:yellow;
-            color:black;
-            padding:6px;
-            border-radius:5px;
-        }
-
-        .pending{
-            background:red;
-            color:white;
-            padding:6px;
-            border-radius:5px;
-        }
-
-    </style>
+</style>
 
 </head>
 
 <body>
 
-<div class="dashboard-box">
+<!-- HEADER -->
 
-    <div class="header">
+<div class="topbar">
 
-        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+<h2>Vendor Dashboard</h2>
 
-        <h1>Vendor Management Dashboard</h1>
+<div class="menu">
 
-    </div>
+<button class="menu-btn">
+Nikhil ▼
+</button>
 
-    <div class="filters">
+<div class="dropdown">
 
-        <input type="text" id="dateFilter" placeholder="Search Date">
+<a href="#">
+Change Password
+</a>
 
-        <input type="text" id="poFilter" placeholder="Search PO Number">
-
-        <input type="text" id="materialFilter" placeholder="Search Material Code">
-
-        <input type="text" id="vendorFilter" placeholder="Search Vendor Code">
-
-    </div>
-
-    <table id="dataTable">
-
-        <tr>
-            <th>Date</th>
-            <th>PO No</th>
-            <th>Material Code</th>
-            <th>Vendor Code</th>
-            <th>Material</th>
-            <th>PO Qty</th>
-            <th>Dispatch Qty</th>
-            <th>Pending Qty</th>
-            <th>Status</th>
-        </tr>
-
-        <tr>
-            <td>12-May-2026</td>
-            <td>450001</td>
-            <td>MAT101</td>
-            <td>VEN001</td>
-            <td>Belt</td>
-            <td>1000</td>
-            <td>600</td>
-            <td>400</td>
-            <td><span class="partial">PARTIAL</span></td>
-        </tr>
-
-        <tr>
-            <td>13-May-2026</td>
-            <td>450002</td>
-            <td>MAT102</td>
-            <td>VEN002</td>
-            <td>Pulley</td>
-            <td>500</td>
-            <td>500</td>
-            <td>0</td>
-            <td><span class="completed">COMPLETED</span></td>
-        </tr>
-
-        <tr>
-            <td>14-May-2026</td>
-            <td>450003</td>
-            <td>MAT103</td>
-            <td>VEN003</td>
-            <td>Coupling</td>
-            <td>700</td>
-            <td>0</td>
-            <td>700</td>
-            <td><span class="pending">PENDING</span></td>
-        </tr>
-
-    </table>
+<a href="/logout">
+Logout
+</a>
 
 </div>
 
-<script>
+</div>
 
-const filters = document.querySelectorAll('.filters input');
+</div>
 
-filters.forEach(input => {
-    input.addEventListener('keyup', filterTable);
-});
+<!-- PAGE CONTENT -->
 
-function filterTable() {
+<div class="content">
 
-    let date = document.getElementById('dateFilter').value.toLowerCase();
-    let po = document.getElementById('poFilter').value.toLowerCase();
-    let material = document.getElementById('materialFilter').value.toLowerCase();
-    let vendor = document.getElementById('vendorFilter').value.toLowerCase();
+<div class="card">
 
-    let table = document.getElementById('dataTable');
-    let tr = table.getElementsByTagName('tr');
+<h1>Welcome to Vendor Portal</h1>
 
-    for(let i = 1; i < tr.length; i++) {
+<p>
+PO details, dispatch updates,
+commitment dates and vendor data
+will appear here.
+</p>
 
-        let tdDate = tr[i].getElementsByTagName('td')[0];
-        let tdPO = tr[i].getElementsByTagName('td')[1];
-        let tdMaterial = tr[i].getElementsByTagName('td')[2];
-        let tdVendor = tr[i].getElementsByTagName('td')[3];
+</div>
 
-        if(
-            tdDate.innerHTML.toLowerCase().includes(date) &&
-            tdPO.innerHTML.toLowerCase().includes(po) &&
-            tdMaterial.innerHTML.toLowerCase().includes(material) &&
-            tdVendor.innerHTML.toLowerCase().includes(vendor)
-        ){
-            tr[i].style.display = "";
-        }
-        else{
-            tr[i].style.display = "none";
-        }
-    }
-}
-
-</script>
+</div>
 
 </body>
-
 </html>

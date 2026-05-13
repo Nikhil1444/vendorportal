@@ -1,22 +1,28 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def login():
-
-    if request.method == 'POST':
-
-        username = request.form['username']
-        password = request.form['password']
-
-        if username == 'Vendor' and password == '1234':
-            return render_template('dashboard.html')
-
-        else:
-            return "Invalid Username or Password"
-
     return render_template('login.html')
 
+
+@app.route('/dashboard', methods=['POST'])
+def dashboard():
+
+    username = request.form['username']
+    password = request.form['password']
+
+    if username == "admin" and password == "1234":
+        return render_template('dashboard.html')
+
+    return "Invalid Username or Password"
+
+
+@app.route('/logout')
+def logout():
+    return redirect('/')
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)

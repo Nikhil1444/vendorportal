@@ -3,135 +3,91 @@
 
 <head>
 
-    <title>JK Vendor Portal Login</title>
+<title>Vendor Login</title>
 
-    <style>
+<style>
 
-        body{
-            margin:0;
-            padding:0;
-            font-family:Arial;
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f3f4f6;
+}
 
-            background-image:url("{{ url_for('static', filename='background.jpg') }}");
-            background-size:cover;
-            background-position:center;
-            background-repeat:no-repeat;
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
 
-            height:100vh;
+.login-box{
+    width:350px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
 
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
+h2{
+    text-align:center;
+    margin-bottom:30px;
+}
 
-        .login-box{
-            width:500px;
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
 
-            background:rgba(255,255,255,0.15);
+button{
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
 
-            backdrop-filter:blur(10px);
+button:hover{
+    background:#1d4ed8;
+}
 
-            padding:40px;
-
-            border-radius:20px;
-
-            text-align:center;
-
-            box-shadow:0px 0px 25px black;
-
-            border:1px solid rgba(255,255,255,0.3);
-        }
-
-        .logo{
-            width:400px;
-            height:auto;
-            margin-bottom:20px;
-        }
-
-        h1{
-            color:white;
-            margin-bottom:30px;
-            font-size:35px;
-            text-shadow:2px 2px 5px black;
-        }
-
-        input{
-            width:90%;
-            padding:14px;
-            margin:12px 0;
-
-            border:none;
-            border-radius:8px;
-
-            font-size:16px;
-        }
-
-        button{
-            width:95%;
-            padding:14px;
-
-            background:blue;
-            color:white;
-
-            border:none;
-            border-radius:8px;
-
-            font-size:18px;
-
-            cursor:pointer;
-
-            margin-top:15px;
-        }
-
-        button:hover{
-            background:darkblue;
-        }
-
-        .forgot-password{
-            margin-top:18px;
-        }
-
-        .forgot-password a{
-            color:white;
-            text-decoration:none;
-            font-size:16px;
-            font-weight:bold;
-        }
-
-        .forgot-password a:hover{
-            text-decoration:underline;
-        }
-
-    </style>
+</style>
 
 </head>
 
 <body>
 
-    <div class="login-box">
+<div class="container">
 
-        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+<div class="login-box">
 
-        <h1>JK Vendor Portal Login</h1>
+<h2>Vendor Portal Login</h2>
 
-        <form method="POST">
+<form action="/dashboard" method="POST">
 
-            <input type="text" name="username" placeholder="Enter Username" required>
+<input type="text"
+name="username"
+placeholder="Username"
+required>
 
-            <input type="password" name="password" placeholder="Enter Password" required>
+<input type="password"
+name="password"
+placeholder="Password"
+required>
 
-            <button type="submit">Login</button>
+<button type="submit">
+Login
+</button>
 
-        </form>
+</form>
 
-        <div class="forgot-password">
+</div>
 
-            <a href="#">Forgot Password?</a>
-
-        </div>
-
-    </div>
+</div>
 
 </body>
-
 </html>
