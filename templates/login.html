@@ -11,7 +11,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial;
 }
 
 body{
@@ -23,11 +23,7 @@ body{
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-
-    overflow:hidden;
 }
-
-/* DARK OVERLAY */
 
 .overlay{
     width:100%;
@@ -40,11 +36,11 @@ body{
     align-items:center;
 }
 
-/* GLASS LOGIN BOX */
+/* LOGIN BOX */
 
 .login-box{
 
-    width:400px;
+    width:420px;
 
     padding:40px;
 
@@ -77,24 +73,20 @@ body{
 
 h2{
     margin-bottom:30px;
-    font-size:36px;
+    font-size:34px;
     color:white;
 }
 
-/* INPUT BOX */
-
-.input-box{
-    margin-bottom:20px;
-}
+/* INPUT */
 
 input{
     width:100%;
 
     padding:14px;
 
-    border:none;
+    margin-bottom:20px;
 
-    outline:none;
+    border:none;
 
     border-radius:10px;
 
@@ -106,8 +98,6 @@ input{
 
     font-size:16px;
 }
-
-/* PLACEHOLDER */
 
 input::placeholder{
     color:#eeeeee;
@@ -137,14 +127,42 @@ button{
 
 button:hover{
     background:#1d4ed8;
-    transform:scale(1.02);
 }
 
-/* FOOTER */
+/* FORGOT PASSWORD */
+
+.forgot{
+    margin-top:15px;
+}
+
+.forgot a{
+    color:#ffffff;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.forgot a:hover{
+    text-decoration:underline;
+}
+
+/* ERROR MESSAGE */
+
+.error{
+    background:#ef4444;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+    color:white;
+
+    font-size:15px;
+}
 
 .footer{
     margin-top:20px;
-    font-size:14px;
     color:#dddddd;
 }
 
@@ -158,36 +176,34 @@ button:hover{
 
 <div class="login-box">
 
-<!-- LOGO -->
-
 <img src="{{ url_for('static', filename='logo.png') }}"
 class="logo">
 
-<!-- TITLE -->
-
 <h2>Vendor Portal</h2>
 
-<!-- LOGIN FORM -->
+<!-- ERROR MESSAGE -->
+
+{% if error %}
+
+<div class="error">
+
+{{ error }}
+
+</div>
+
+{% endif %}
 
 <form action="/dashboard" method="POST">
-
-<div class="input-box">
 
 <input type="text"
 name="username"
 placeholder="Username"
 required>
 
-</div>
-
-<div class="input-box">
-
 <input type="password"
 name="password"
 placeholder="Password"
 required>
-
-</div>
 
 <button type="submit">
 
@@ -196,6 +212,18 @@ Login
 </button>
 
 </form>
+
+<!-- FORGOT PASSWORD -->
+
+<div class="forgot">
+
+<a href="/forgot-password">
+
+Forgot Password?
+
+</a>
+
+</div>
 
 <div class="footer">
 

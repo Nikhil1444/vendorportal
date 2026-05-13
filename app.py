@@ -13,10 +13,28 @@ def dashboard():
     username = request.form['username']
     password = request.form['password']
 
+    # LOGIN CHECK
+
     if username == "admin" and password == "1234":
         return render_template('dashboard.html')
 
-    return "Invalid Username or Password"
+    # INVALID LOGIN
+
+    error = "Invalid Username or Password"
+
+    return render_template('login.html', error=error)
+
+
+@app.route('/forgot-password')
+def forgot_password():
+    return """
+    <h2>Forgot Password</h2>
+
+    <p>
+    Please contact Admin or EPD Team
+    to reset your password.
+    </p>
+    """
 
 
 @app.route('/logout')
