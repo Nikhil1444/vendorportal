@@ -18,7 +18,7 @@ body{
     background:#f3f4f6;
 }
 
-/* TOP HEADER */
+/* TOPBAR */
 
 .topbar{
 
@@ -47,8 +47,7 @@ body{
 /* LOGO */
 
 .logo{
-
-    width:250px;
+    width:100px;
 }
 
 /* MENU */
@@ -57,7 +56,7 @@ body{
     position:relative;
 }
 
-/* 3 LINE BUTTON */
+/* BUTTON */
 
 .menu-btn{
 
@@ -82,11 +81,11 @@ body{
 
     position:absolute;
 
-    top:50px;
+    top:55px;
 
     left:0;
 
-    width:240px;
+    width:260px;
 
     background:white;
 
@@ -103,8 +102,7 @@ body{
 
 /* SHOW MENU */
 
-.menu:hover .dropdown{
-
+.menu.active .dropdown{
     display:block;
 }
 
@@ -120,9 +118,9 @@ body{
 
     color:#111827;
 
-    font-size:15px;
-
     border-bottom:1px solid #eeeeee;
+
+    font-size:15px;
 }
 
 .dropdown a:hover{
@@ -130,14 +128,28 @@ body{
     background:#f3f4f6;
 }
 
-/* PAGE CONTENT */
+/* SUB MENU */
+
+.submenu{
+
+    background:#f9fafb;
+}
+
+.submenu a{
+
+    padding-left:40px;
+
+    font-size:14px;
+}
+
+/* CONTENT */
 
 .content{
 
     padding:30px;
 }
 
-/* DASHBOARD CARDS */
+/* CARDS */
 
 .cards{
 
@@ -159,13 +171,6 @@ body{
     border-radius:15px;
 
     box-shadow:0 5px 15px rgba(0,0,0,0.08);
-
-    transition:0.3s;
-}
-
-.card:hover{
-
-    transform:translateY(-5px);
 }
 
 .card h3{
@@ -196,9 +201,9 @@ body{
 
 <!-- MENU -->
 
-<div class="menu">
+<div class="menu" id="menu">
 
-<button class="menu-btn">
+<button class="menu-btn" onclick="toggleMenu()">
 
 ☰
 
@@ -208,9 +213,11 @@ body{
 
 <a href="#">
 
-Order Details
+Orders ▼
 
 </a>
+
+<div class="submenu">
 
 <a href="#">
 
@@ -223,6 +230,8 @@ Pending Orders
 Current Orders
 
 </a>
+
+</div>
 
 <a href="#">
 
@@ -251,7 +260,7 @@ class="logo">
 
 </div>
 
-<!-- PAGE CONTENT -->
+<!-- CONTENT -->
 
 <div class="content">
 
@@ -279,7 +288,7 @@ class="logo">
 
 <div class="card">
 
-<h3>Dispatch Completed</h3>
+<h3>Current Orders</h3>
 
 <p>78 Orders</p>
 
@@ -287,15 +296,27 @@ class="logo">
 
 <div class="card">
 
-<h3>Commitment Delays</h3>
+<h3>Dispatch Details</h3>
 
-<p>15 Orders</p>
-
-</div>
+<p>15 Pending Dispatch</p>
 
 </div>
 
 </div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function toggleMenu(){
+
+    document.getElementById("menu")
+    .classList.toggle("active");
+}
+
+</script>
 
 </body>
 </html>
