@@ -15,7 +15,7 @@
 }
 
 body{
-    background:#f3f4f6;
+    background:#f3f6f5;
 }
 
 /* TOPBAR */
@@ -47,7 +47,7 @@ body{
 /* LOGO */
 
 .logo{
-    width:150px;
+    width:45px;
 }
 
 /* MENU */
@@ -100,7 +100,7 @@ body{
     z-index:9999;
 }
 
-/* SHOW MAIN MENU */
+/* SHOW MENU */
 
 .menu.active .dropdown{
     display:block;
@@ -152,38 +152,47 @@ body{
     font-size:14px;
 }
 
+/* CONTENT */
+
 .content{
 
     padding:30px;
 }
 
-/* CARDS */
+/* TABLE */
 
-.cards{
+table{
 
-    display:grid;
+    width:100%;
 
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    border-collapse:collapse;
 
-    gap:20px;
+    background:white;
 
     margin-top:20px;
 }
 
-.card{
+table th{
 
-    background:white;
+    background:#2563eb;
 
-    padding:25px;
+    color:white;
 
-    border-radius:15px;
+    padding:12px;
 
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    text-align:left;
 }
 
-.card h3{
+table td{
 
-    margin-bottom:10px;
+    padding:12px;
+
+    border-bottom:1px solid #eeeeee;
+}
+
+table tr:hover{
+
+    background:#f9fafb;
 }
 
 </style>
@@ -246,6 +255,12 @@ Change Password
 
 </a>
 
+<a href="/logout">
+
+Logout
+
+</a>
+
 </div>
 
 </div>
@@ -267,43 +282,48 @@ class="logo">
 
 <h1>Welcome to Vendor Portal</h1>
 
-<br>
+<!-- EXCEL DATA TABLE -->
 
-<div class="cards">
+<table>
 
-<div class="card">
+<tr>
 
-<h3>Total Orders</h3>
+<th>PO No</th>
+<th>Product</th>
+<th>Vendor</th>
+<th>SKU</th>
+<th>Description</th>
+<th>Size</th>
+<th>Qty</th>
+<th>Status</th>
 
-<p>125 Orders</p>
+</tr>
 
-</div>
+{% for row in orders %}
 
-<div class="card">
+<tr>
 
-<h3>Pending Orders</h3>
+<td>{{ row['PO No'] }}</td>
 
-<p>32 Orders</p>
+<td>{{ row['product'] }}</td>
 
-</div>
+<td>{{ row['Vendor'] }}</td>
 
-<div class="card">
+<td>{{ row['SKU'] }}</td>
 
-<h3>Current Orders</h3>
+<td>{{ row['Description'] }}</td>
 
-<p>78 Orders</p>
+<td>{{ row['Size'] }}</td>
 
-</div>
+<td>{{ row['Qty'] }}</td>
 
-<div class="card">
+<td>{{ row['Status'] }}</td>
 
-<h3>Dispatch Details</h3>
+</tr>
 
-<p>15 Pending Dispatch</p>
+{% endfor %}
 
-</div>
-
-</div>
+</table>
 
 </div>
 
