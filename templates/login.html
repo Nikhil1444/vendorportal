@@ -11,7 +11,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
 }
 
 body{
@@ -23,7 +23,11 @@ body{
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
+
+    overflow:hidden;
 }
+
+/* OVERLAY */
 
 .overlay{
     width:100%;
@@ -40,11 +44,11 @@ body{
 
 .login-box{
 
-    width:420px;
+    width:430px;
 
     padding:40px;
 
-    border-radius:25px;
+    border-radius:30px;
 
     background:rgba(255,255,255,0.12);
 
@@ -62,7 +66,7 @@ body{
 /* LOGO */
 
 .logo{
-    width:200px;
+    width:220px;
 
     display:block;
 
@@ -72,23 +76,25 @@ body{
 /* TITLE */
 
 h2{
-    margin-bottom:30px;
-    font-size:34px;
+    margin-bottom:35px;
+    font-size:38px;
     color:white;
 }
 
-/* INPUT */
+/* INPUTS */
 
 input{
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
-    margin-bottom:20px;
+    margin-bottom:22px;
 
     border:none;
 
-    border-radius:10px;
+    outline:none;
+
+    border-radius:12px;
 
     background:rgba(255,255,255,0.18);
 
@@ -103,22 +109,22 @@ input::placeholder{
     color:#eeeeee;
 }
 
-/* LOGIN BUTTON */
+/* BUTTON */
 
 button{
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
     background:#2563eb;
 
     color:white;
 
-    font-size:18px;
+    font-size:20px;
 
     cursor:pointer;
 
@@ -127,22 +133,26 @@ button{
 
 button:hover{
     background:#1d4ed8;
+    transform:scale(1.02);
 }
 
 /* FORGOT PASSWORD */
 
 .forgot{
-    margin-top:15px;
+    margin-top:18px;
+    text-align:center;
 }
 
 .forgot a{
     color:#ffffff;
+    font-size:15px;
+    font-weight:bold;
     text-decoration:none;
-    font-size:14px;
 }
 
 .forgot a:hover{
     text-decoration:underline;
+    color:#60a5fa;
 }
 
 /* ERROR MESSAGE */
@@ -152,7 +162,7 @@ button:hover{
 
     padding:12px;
 
-    border-radius:8px;
+    border-radius:10px;
 
     margin-bottom:20px;
 
@@ -161,8 +171,11 @@ button:hover{
     font-size:15px;
 }
 
+/* FOOTER */
+
 .footer{
-    margin-top:20px;
+    margin-top:25px;
+    font-size:14px;
     color:#dddddd;
 }
 
@@ -176,8 +189,12 @@ button:hover{
 
 <div class="login-box">
 
+<!-- LOGO -->
+
 <img src="{{ url_for('static', filename='logo.png') }}"
 class="logo">
+
+<!-- TITLE -->
 
 <h2>Vendor Portal</h2>
 
@@ -192,6 +209,8 @@ class="logo">
 </div>
 
 {% endif %}
+
+<!-- LOGIN FORM -->
 
 <form action="/dashboard" method="POST">
 
@@ -211,31 +230,7 @@ Login
 
 </button>
 
-<div class="forgot">
-
-<a href="/forgot-password">
-
-Forgot Password?
-
-</a>
-
-</div>
-.forgot{
-    margin-top:18px;
-    text-align:center;
-}
-
-.forgot a{
-    color:#ffffff;
-    font-size:15px;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-.forgot a:hover{
-    text-decoration:underline;
-    color:#60a5fa;
-}
+</form>
 
 <!-- FORGOT PASSWORD -->
 
@@ -248,6 +243,8 @@ Forgot Password?
 </a>
 
 </div>
+
+<!-- FOOTER -->
 
 <div class="footer">
 
