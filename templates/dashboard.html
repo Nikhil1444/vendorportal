@@ -47,7 +47,7 @@ body{
 /* LOGO */
 
 .logo{
-    width:100px;
+    width:45px;
 }
 
 /* MENU */
@@ -100,7 +100,7 @@ body{
     z-index:9999;
 }
 
-/* SHOW MENU */
+/* SHOW MAIN MENU */
 
 .menu.active .dropdown{
     display:block;
@@ -121,6 +121,8 @@ body{
     border-bottom:1px solid #eeeeee;
 
     font-size:15px;
+
+    cursor:pointer;
 }
 
 .dropdown a:hover{
@@ -128,21 +130,27 @@ body{
     background:#f3f4f6;
 }
 
-/* SUB MENU */
+/* SUBMENU */
 
 .submenu{
+
+    display:none;
 
     background:#f9fafb;
 }
 
+/* SHOW SUBMENU */
+
+.submenu.active{
+    display:block;
+}
+
 .submenu a{
 
-    padding-left:40px;
+    padding-left:45px;
 
     font-size:14px;
 }
-
-/* CONTENT */
 
 .content{
 
@@ -176,15 +184,6 @@ body{
 .card h3{
 
     margin-bottom:10px;
-
-    color:#111827;
-}
-
-.card p{
-
-    color:gray;
-
-    font-size:18px;
 }
 
 </style>
@@ -211,13 +210,15 @@ body{
 
 <div class="dropdown">
 
-<a href="#">
+<a onclick="toggleOrders()">
 
-Orders ▼
+Orders ▶
 
 </a>
 
-<div class="submenu">
+<!-- SUBMENU -->
+
+<div class="submenu" id="ordersSubmenu">
 
 <a href="#">
 
@@ -310,9 +311,19 @@ class="logo">
 
 <script>
 
+/* MAIN MENU */
+
 function toggleMenu(){
 
     document.getElementById("menu")
+    .classList.toggle("active");
+}
+
+/* SUB MENU */
+
+function toggleOrders(){
+
+    document.getElementById("ordersSubmenu")
     .classList.toggle("active");
 }
 
