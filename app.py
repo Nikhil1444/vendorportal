@@ -3,7 +3,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-FILE_PATH = "data/master_sheet.xlsx"
+FILE_PATH = "data/Master sheet.xlsx"
 
 
 # LOAD EXCEL
