@@ -5,20 +5,24 @@
 
     <title>{{ title }}</title>
 
+    <!-- FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
 
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family:Arial;
+            font-family:'Poppins', sans-serif;
         }
 
         body{
             background:#f3f4f6;
         }
 
-        /* TOP BAR */
+        /* TOPBAR */
 
         .topbar{
             height:90px;
@@ -54,8 +58,9 @@
 
         .title{
             margin-left:20px;
-            font-size:24px;
-            font-weight:bold;
+            font-size:26px;
+            font-weight:700;
+            letter-spacing:1px;
         }
 
         /* SIDEBAR */
@@ -106,7 +111,7 @@
 
         .submenu a{
             display:block;
-            color:white;
+            color:#0fb3c2;
             text-decoration:none;
             padding:12px;
             margin-top:5px;
@@ -114,7 +119,7 @@
         }
 
         .submenu a:hover{
-            background:#2563eb;
+            background:#374151;
         }
 
         /* DASHBOARD */
@@ -139,12 +144,34 @@
 
         .card h2{
             margin-bottom:10px;
+            font-size:20px;
+        }
+
+        /* SEARCH BAR */
+
+        .search-container{
+            display:flex;
+            gap:15px;
+            margin-top:30px;
+            margin-bottom:20px;
+            background:white;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-container input{
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            width:250px;
+            font-size:14px;
         }
 
         /* TABLE */
 
         .table-section{
-            margin-top:40px;
+            margin-top:20px;
         }
 
         .table-container{
@@ -160,21 +187,21 @@
         }
 
         th{
-            background:#2563eb;
+            background:#0fb3c2;
             color:white;
-            padding:12px;
+            padding:14px;
             border:1px solid #ddd;
             font-size:13px;
         }
 
         td{
-            padding:10px;
+            padding:12px;
             border:1px solid #ddd;
             font-size:12px;
         }
 
         tr:hover{
-            background:#f1f5f9;
+            background:#e6fffa;
         }
 
     </style>
@@ -333,52 +360,46 @@
             Welcome to Vendor Portal
         </h1>
 
+        <!-- CARDS -->
+
         <div class="cards">
 
             <div class="card">
-
-                <h2>Total Order Qty</h2>
-
-                <p>
-
-                    {{
-                        orders
-                        | sum(attribute='ORDER QTY')
-                    }}
-
-                </p>
-
+                <h2>Total Orders</h2>
+                <p>{{ orders|length }}</p>
             </div>
 
             <div class="card">
-
                 <h2>Pending Orders</h2>
-
-                <p>
-                    Orders Tracking
-                </p>
-
+                <p>Tracking Orders</p>
             </div>
 
             <div class="card">
-
                 <h2>Current Orders</h2>
-
-                <p>
-                    Live Updates
-                </p>
-
+                <p>Live Status</p>
             </div>
 
             <div class="card">
-
                 <h2>Dispatch Details</h2>
-
-                <p>
-                    Vendor Dispatch
-                </p>
-
+                <p>Vendor Updates</p>
             </div>
+
+        </div>
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <input type="date"
+                   id="dateSearch">
+
+            <input type="text"
+                   id="orderSearch"
+                   placeholder="Search Order No">
+
+            <input type="text"
+                   id="materialSearch"
+                   placeholder="Search Material Group">
 
         </div>
 
@@ -388,7 +409,7 @@
 
             <div class="table-container">
 
-                <table>
+                <table id="ordersTable">
 
                     <thead>
 
@@ -396,9 +417,7 @@
 
                             {% for column in orders[0].keys() %}
 
-                            <th>
-                                {{ column }}
-                            </th>
+                            <th>{{ column }}</th>
 
                             {% endfor %}
 
@@ -414,9 +433,7 @@
 
                             {% for value in order.values() %}
 
-                            <td>
-                                {{ value }}
-                            </td>
+                            <td>{{ value }}</td>
 
                             {% endfor %}
 
@@ -470,6 +487,77 @@
             }
 
         }
+
+        /* SEARCH FILTER */
+
+        const dateSearch =
+        document.getElementById("dateSearch");
+
+        const orderSearch =
+        document.getElementById("orderSearch");
+
+        const materialSearch =
+        document.getElementById("materialSearch");
+
+        const rows =
+        document.querySelectorAll("#ordersTable tbody tr");
+
+        function filterTable(){
+
+            rows.forEach(row => {
+
+                const date =
+                row.cells[0].innerText.toLowerCase();
+
+                const order =
+                row.cells[1].innerText.toLowerCase();
+
+                const material =
+                row.cells[2].innerText.toLowerCase();
+
+                const dateValue =
+                dateSearch.value.toLowerCase();
+
+                const orderValue =
+                orderSearch.value.toLowerCase();
+
+                const materialValue =
+                materialSearch.value.toLowerCase();
+
+                if(
+                    date.includes(dateValue) &&
+                    order.includes(orderValue) &&
+                    material.includes(materialValue)
+                ){
+
+                    row.style.display = "";
+
+                }
+
+                else{
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+        orderSearch.addEventListener(
+            "keyup",
+            filterTable
+        );
+
+        materialSearch.addEventListener(
+            "keyup",
+            filterTable
+        );
+
+        dateSearch.addEventListener(
+            "change",
+            filterTable
+        );
 
     </script>
 
