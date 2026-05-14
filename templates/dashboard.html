@@ -3,351 +3,469 @@
 
 <head>
 
-<title>Vendor Dashboard</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-body{
-    background:#f3f6f5;
-}
-
-/* TOPBAR */
-
-.topbar{
-
-    background:#111827;
-
-    color:white;
-
-    padding:15px 30px;
-
-    display:flex;
-
-    align-items:center;
-}
-
-/* LEFT SECTION */
-
-.left-section{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-}
-
-/* LOGO */
-
-.logo{
-    width:45px;
-}
-
-/* MENU */
-
-.menu{
-    position:relative;
-}
-
-/* BUTTON */
-
-.menu-btn{
-
-    background:#2563eb;
-
-    color:white;
-
-    border:none;
-
-    padding:8px 15px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-size:22px;
-}
-
-/* DROPDOWN */
-
-.dropdown{
-
-    position:absolute;
-
-    top:55px;
-
-    left:0;
-
-    width:260px;
-
-    background:white;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-
-    display:none;
-
-    z-index:9999;
-}
-
-/* SHOW MENU */
-
-.menu.active .dropdown{
-    display:block;
-}
-
-/* MENU LINKS */
-
-.dropdown a{
-
-    display:block;
-
-    padding:15px 20px;
-
-    text-decoration:none;
-
-    color:#111827;
-
-    border-bottom:1px solid #eeeeee;
-
-    font-size:15px;
-
-    cursor:pointer;
-}
-
-.dropdown a:hover{
-
-    background:#f3f4f6;
-}
-
-/* SUBMENU */
-
-.submenu{
-
-    display:none;
-
-    background:#f9fafb;
-}
-
-/* SHOW SUBMENU */
-
-.submenu.active{
-    display:block;
-}
-
-.submenu a{
-
-    padding-left:45px;
-
-    font-size:14px;
-}
-
-/* CONTENT */
-
-.content{
-
-    padding:30px;
-}
-
-/* TABLE */
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    background:white;
-
-    margin-top:20px;
-}
-
-table th{
-
-    background:#2563eb;
-
-    color:white;
-
-    padding:12px;
-
-    text-align:left;
-}
-
-table td{
-
-    padding:12px;
-
-    border-bottom:1px solid #eeeeee;
-}
-
-table tr:hover{
-
-    background:#f9fafb;
-}
-
-</style>
+    <title>{{ title }}</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:#f3f4f6;
+        }
+
+        /* TOP BAR */
+
+        .topbar{
+            height:90px;
+            background:#06152d;
+            color:white;
+            display:flex;
+            align-items:center;
+            padding:20px;
+        }
+
+        .menu-btn{
+            width:60px;
+            height:60px;
+            background:#2563eb;
+            border:none;
+            color:white;
+            font-size:28px;
+            border-radius:12px;
+            cursor:pointer;
+        }
+
+        .logo{
+            background:white;
+            color:#008060;
+            margin-left:20px;
+            padding:20px;
+            font-size:30px;
+            font-weight:bold;
+        }
+
+        .title{
+            margin-left:20px;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:280px;
+            height:100vh;
+            background:#06152d;
+            position:fixed;
+            top:0;
+            left:-300px;
+            transition:0.3s;
+            padding:20px;
+            overflow-y:auto;
+            z-index:1000;
+        }
+
+        .sidebar.active{
+            left:0;
+        }
+
+        .close-btn{
+            color:white;
+            font-size:30px;
+            cursor:pointer;
+            margin-bottom:20px;
+        }
+
+        .menu-title{
+            color:white;
+            background:#1e2c44;
+            padding:15px;
+            margin-top:15px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .menu-title a{
+            color:white;
+            text-decoration:none;
+        }
+
+        .submenu{
+            display:none;
+            padding-left:15px;
+        }
+
+        .submenu a{
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:12px;
+            margin-top:5px;
+            border-radius:8px;
+        }
+
+        .submenu a:hover{
+            background:#2563eb;
+        }
+
+        /* DASHBOARD */
+
+        .dashboard{
+            padding:30px;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:20px;
+            margin-top:30px;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h2{
+            margin-bottom:10px;
+        }
+
+        /* TABLE */
+
+        .table-section{
+            margin-top:40px;
+        }
+
+        .table-container{
+            overflow:auto;
+            background:white;
+            border-radius:15px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:1800px;
+        }
+
+        th{
+            background:#2563eb;
+            color:white;
+            padding:12px;
+            border:1px solid #ddd;
+            font-size:13px;
+        }
+
+        td{
+            padding:10px;
+            border:1px solid #ddd;
+            font-size:12px;
+        }
+
+        tr:hover{
+            background:#f1f5f9;
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-<!-- TOPBAR -->
+    <!-- TOPBAR -->
 
-<div class="topbar">
+    <div class="topbar">
 
-<div class="left-section">
+        <button class="menu-btn"
+                onclick="openSidebar()">
 
-<!-- MENU -->
+            ☰
 
-<div class="menu" id="menu">
+        </button>
 
-<button class="menu-btn" onclick="toggleMenu()">
+        <div class="logo">
+            JK Fenner
+        </div>
 
-☰
+        <div class="title">
+            Vendor Dashboard
+        </div>
 
-</button>
+    </div>
 
-<div class="dropdown">
+    <!-- SIDEBAR -->
 
-<a onclick="toggleOrders()">
+    <div class="sidebar" id="sidebar">
 
-Orders ▶
+        <div class="close-btn"
+             onclick="closeSidebar()">
 
-</a>
+            ✖
 
-<!-- SUBMENU -->
+        </div>
 
-<div class="submenu" id="ordersSubmenu">
+        <!-- HOME -->
 
-<a href="#">
+        <div class="menu-title">
 
-Pending Orders
+            <a href="/dashboard">
+                Home
+            </a>
 
-</a>
+        </div>
 
-<a href="#">
+        <!-- ORDERS -->
 
-Current Orders
+        <div class="menu-title"
+             onclick="toggleMenu('ordersMenu')">
 
-</a>
+            Orders
 
-</div>
+        </div>
 
-<a href="#">
+        <div class="submenu"
+             id="ordersMenu">
 
-Dispatch Details
+            <a href="/pending-orders">
+                Pending Orders
+            </a>
 
-</a>
+            <a href="/current-orders">
+                Current Orders
+            </a>
 
-<a href="#">
+        </div>
 
-Change Password
+        <!-- PRIORITY -->
 
-</a>
+        <div class="menu-title"
+             onclick="toggleMenu('priorityMenu')">
 
-<a href="/logout">
+            Priority
 
-Logout
+        </div>
 
-</a>
+        <div class="submenu"
+             id="priorityMenu">
 
-</div>
+            <a href="/priority/p1">
+                P1
+            </a>
 
-</div>
+            <a href="/priority/p2">
+                P2
+            </a>
 
-<!-- LOGO -->
+            <a href="/priority/p3">
+                P3
+            </a>
 
-<img src="{{ url_for('static', filename='logo.png') }}"
-class="logo">
+        </div>
 
-<h2>Vendor Dashboard</h2>
+        <!-- STATUS -->
 
-</div>
+        <div class="menu-title"
+             onclick="toggleMenu('statusMenu')">
 
-</div>
+            Status
 
-<!-- CONTENT -->
+        </div>
 
-<div class="content">
+        <div class="submenu"
+             id="statusMenu">
 
-<h1>Welcome to Vendor Portal</h1>
+            <a href="/status/pending">
+                Pending
+            </a>
 
-<!-- EXCEL DATA TABLE -->
+            <a href="/status/partial">
+                Partial
+            </a>
 
-<table>
+            <a href="/status/completed">
+                Completed
+            </a>
 
-<tr>
+        </div>
 
-<th>PO No</th>
-<th>Product</th>
-<th>Vendor</th>
-<th>SKU</th>
-<th>Description</th>
-<th>Size</th>
-<th>Qty</th>
-<th>Status</th>
+        <!-- VENDOR -->
 
-</tr>
+        <div class="menu-title">
 
-{% for row in orders %}
+            <a href="/vendors">
+                Vendor
+            </a>
 
-<tr>
+        </div>
 
-<td>{{ row['PO No'] }}</td>
+        <!-- LOGOUT -->
 
-<td>{{ row['product'] }}</td>
+        <div class="menu-title">
 
-<td>{{ row['Vendor'] }}</td>
+            <a href="/">
+                Logout
+            </a>
 
-<td>{{ row['SKU'] }}</td>
+        </div>
 
-<td>{{ row['Description'] }}</td>
+    </div>
 
-<td>{{ row['Size'] }}</td>
+    <!-- DASHBOARD -->
 
-<td>{{ row['Qty'] }}</td>
+    <div class="dashboard">
 
-<td>{{ row['Status'] }}</td>
+        <h1>
+            Welcome to Vendor Portal
+        </h1>
 
-</tr>
+        <div class="cards">
 
-{% endfor %}
+            <div class="card">
 
-</table>
+                <h2>Total Order Qty</h2>
 
-</div>
+                <p>
 
-<!-- JAVASCRIPT -->
+                    {{
+                        orders
+                        | sum(attribute='ORDER QTY')
+                    }}
 
-<script>
+                </p>
 
-/* MAIN MENU */
+            </div>
 
-function toggleMenu(){
+            <div class="card">
 
-    document.getElementById("menu")
-    .classList.toggle("active");
-}
+                <h2>Pending Orders</h2>
 
-/* SUB MENU */
+                <p>
+                    Orders Tracking
+                </p>
 
-function toggleOrders(){
+            </div>
 
-    document.getElementById("ordersSubmenu")
-    .classList.toggle("active");
-}
+            <div class="card">
 
-</script>
+                <h2>Current Orders</h2>
+
+                <p>
+                    Live Updates
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>Dispatch Details</h2>
+
+                <p>
+                    Vendor Dispatch
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="table-section">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            {% for column in orders[0].keys() %}
+
+                            <th>
+                                {{ column }}
+                            </th>
+
+                            {% endfor %}
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for order in orders %}
+
+                        <tr>
+
+                            {% for value in order.values() %}
+
+                            <td>
+                                {{ value }}
+                            </td>
+
+                            {% endfor %}
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function openSidebar(){
+
+            document
+            .getElementById("sidebar")
+            .classList.add("active");
+
+        }
+
+        function closeSidebar(){
+
+            document
+            .getElementById("sidebar")
+            .classList.remove("active");
+
+        }
+
+        function toggleMenu(menuId){
+
+            let menu =
+            document.getElementById(menuId);
+
+            if(menu.style.display === "block"){
+
+                menu.style.display = "none";
+
+            }
+
+            else{
+
+                menu.style.display = "block";
+
+            }
+
+        }
+
+    </script>
 
 </body>
+
 </html>
