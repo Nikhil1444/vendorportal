@@ -3,50 +3,58 @@ import pandas as pd
 
 app = Flask(__name__)
 
-FILE_PATH = r'data/Master sheet - Copy.xlsx'
+FILE_PATH = r"data/Master sheet - Copy.xlsx"
+
+
+# LOAD EXCEL
+
+def load_data():
+
+    df = pd.read_excel(
+        FILE_PATH,
+        engine="openpyxl"
+    )
+
+    df.columns = df.columns.str.strip()
+
+    df["ORDER QTY"] = pd.to_numeric(
+        df["ORDER QTY"],
+        errors="coerce"
+    ).fillna(0)
+
+    return df
 
 
 # LOGIN PAGE
 
-@app.route('/')
+@app.route("/")
 def login():
-    return render_template('login.html')
+
+    return render_template(
+        "login.html"
+    )
 
 
 # DASHBOARD
 
-@app.route('/dashboard', methods=['POST'])
+@app.route("/dashboard", methods=["POST"])
 def dashboard():
 
-    username = request.form['username']
-    password = request.form['password']
+    username = request.form["username"]
+    password = request.form["password"]
 
-    # ADMIN LOGIN
+    if username == "admin" and password == "1234":
 
-    if username == 'admin' and password == '1234':
-
-        df = pd.read_excel(
-            FILE_PATH,
-            engine='openpyxl'
-        )
-
-        df.columns = df.columns.str.strip()
-
-        # CONVERT ORDER QTY TO NUMBER
-
-        df['ORDER QTY'] = pd.to_numeric(
-            df['ORDER QTY'],
-            errors='coerce'
-        ).fillna(0)
+        df = load_data()
 
         orders = df.to_dict(
-            orient='records'
+            orient="records"
         )
 
         return render_template(
-            'dashboard.html',
+            "dashboard.html",
             orders=orders,
-            title='Admin Dashboard'
+            title="Admin Dashboard"
         )
 
     return "Invalid Login"
@@ -54,145 +62,126 @@ def dashboard():
 
 # PENDING ORDERS
 
-@app.route('/pending-orders')
+@app.route("/pending-orders")
 def pending_orders():
 
-    df = pd.read_excel(
-        FILE_PATH,
-        engine='openpyxl'
-    )
-
-    df.columns = df.columns.str.strip()
-
-    df['ORDER QTY'] = pd.to_numeric(
-        df['ORDER QTY'],
-        errors='coerce'
-    ).fillna(0)
+    df = load_data()
 
     pending = df[
-        df['STATUS']
+        df["STATUS"]
         .astype(str)
         .str.lower()
-        == 'pending'
+        == "pending"
     ]
 
     orders = pending.to_dict(
-        orient='records'
+        orient="records"
     )
 
     return render_template(
-        'dashboard.html',
+        "dashboard.html",
         orders=orders,
-        title='Pending Orders'
+        title="Pending Orders"
     )
 
 
 # CURRENT ORDERS
 
-@app.route('/current-orders')
+@app.route("/current-orders")
 def current_orders():
 
-    df = pd.read_excel(
-        FILE_PATH,
-        engine='openpyxl'
-    )
-
-    df.columns = df.columns.str.strip()
-
-    df['ORDER QTY'] = pd.to_numeric(
-        df['ORDER QTY'],
-        errors='coerce'
-    ).fillna(0)
+    df = load_data()
 
     current = df[
-        df['STATUS']
+        df["STATUS"]
         .astype(str)
         .str.lower()
-        == 'partial'
+        == "partial"
     ]
 
     orders = current.to_dict(
-        orient='records'
+        orient="records"
     )
 
     return render_template(
-        'dashboard.html',
+        "dashboard.html",
         orders=orders,
-        title='Current Orders'
+        title="Current Orders"
     )
 
 
 # PRIORITY
 
-@app.route('/priority/<level>')
+@app.route("/priority/<level>")
 def priority(level):
 
-    df = pd.read_excel(
-        FILE_PATH,
-        engine='openpyxl'
-    )
-
-    df.columns = df.columns.str.strip()
-
-    df['ORDER QTY'] = pd.to_numeric(
-        df['ORDER QTY'],
-        errors='coerce'
-    ).fillna(0)
+    df = load_data()
 
     filtered = df[
-        df['PRIORITY']
+        df["PRIORITY"]
         .astype(str)
         .str.lower()
         == level.lower()
     ]
 
     orders = filtered.to_dict(
-        orient='records'
+        orient="records"
     )
 
     return render_template(
-        'dashboard.html',
+        "dashboard.html",
         orders=orders,
-        title=level.upper() + ' Priority'
+        title=level.upper() + " Priority"
     )
 
 
 # STATUS
 
-@app.route('/status/<status>')
+@app.route("/status/<status>")
 def status(status):
 
-    df = pd.read_excel(
-        FILE_PATH,
-        engine='openpyxl'
-    )
-
-    df.columns = df.columns.str.strip()
-
-    df['ORDER QTY'] = pd.to_numeric(
-        df['ORDER QTY'],
-        errors='coerce'
-    ).fillna(0)
+    df = load_data()
 
     filtered = df[
-        df['STATUS']
+        df["STATUS"]
         .astype(str)
         .str.lower()
         == status.lower()
     ]
 
     orders = filtered.to_dict(
-        orient='records'
+        orient="records"
     )
 
     return render_template(
-        'dashboard.html',
+        "dashboard.html",
         orders=orders,
-        title=status.capitalize() + ' Status'
+        title=status.capitalize() + " Status"
+    )
+
+
+# VENDORS
+
+@app.route("/vendors")
+def vendors():
+
+    df = load_data()
+
+    orders = df.to_dict(
+        orient="records"
+    )
+
+    return render_template(
+        "dashboard.html",
+        orders=orders,
+        title="Vendor Data"
     )
 
 
 # RUN APP
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+
+    app.run(
+        debug=True
+    )
