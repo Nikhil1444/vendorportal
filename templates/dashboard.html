@@ -40,13 +40,16 @@
             cursor:pointer;
         }
 
-        .logo{
-            background:white;
-            color:#008060;
+        .logo-container{
             margin-left:20px;
-            padding:20px;
-            font-size:30px;
-            font-weight:bold;
+            background:white;
+            padding:10px 20px;
+            border-radius:12px;
+        }
+
+        .logo-img{
+            height:50px;
+            width:auto;
         }
 
         .title{
@@ -191,12 +194,16 @@
 
         </button>
 
-        <div class="logo">
-            JK Fenner
+        <div class="logo-container">
+
+            <img src="{{ url_for('static',
+            filename='logo.png') }}"
+            class="logo-img">
+
         </div>
 
         <div class="title">
-            Vendor Dashboard
+            VENDOR DASHBOARD
         </div>
 
     </div>
